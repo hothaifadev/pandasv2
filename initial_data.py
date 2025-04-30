@@ -268,3 +268,394 @@ invoice_detials = pai.create(
         ],
     },
 )
+
+price_lists = pai.create(
+    path="fgmm/price-lists",
+    description="Price lists table",
+    source={
+        "type": "postgres",
+        "connection": connection,
+        "table": "price_lists",
+        "columns": [
+            {"name": "id", "type": "bigint", "description": "Primary key"},
+            {
+                "name": "en_name",
+                "type": "string",
+                "description": "English name of the price list",
+            },
+            {
+                "name": "ar_name",
+                "type": "string",
+                "description": "Arabic name of the price list",
+            },
+            {
+                "name": "created_for",
+                "type": "string",
+                "description": "Purpose for which the price list was created",
+            },
+            {
+                "name": "center_id",
+                "type": "integer",
+                "description": "ID of the center associated with this price list",
+            },
+            {
+                "name": "en_description",
+                "type": "text",
+                "description": "English description",
+            },
+            {
+                "name": "ar_description",
+                "type": "text",
+                "description": "Arabic description",
+            },
+            {
+                "name": "created_at",
+                "type": "timestamp",
+                "description": "Timestamp when the record was created",
+            },
+            {
+                "name": "updated_at",
+                "type": "timestamp",
+                "description": "Timestamp when the record was last updated",
+            },
+            {
+                "name": "status",
+                "type": "boolean",
+                "description": "Status of the price list (active/inactive)",
+            },
+            {
+                "name": "agency_id",
+                "type": "integer",
+                "description": "ID of the associated agency",
+            },
+            {
+                "name": "brand_id",
+                "type": "integer",
+                "description": "ID of the associated brand",
+            },
+            {
+                "name": "price_listable_id",
+                "type": "integer",
+                "description": "Polymorphic relation ID",
+            },
+            {
+                "name": "price_listable_type",
+                "type": "string",
+                "description": "Polymorphic relation type",
+            },
+            {
+                "name": "is_custom",
+                "type": "boolean",
+                "description": "Indicates if the price list is custom",
+            },
+            {
+                "name": "is_expired",
+                "type": "boolean",
+                "description": "Indicates if the price list is expired",
+            },
+            {
+                "name": "is_gift",
+                "type": "integer",
+                "description": "Indicates if the price list contains gifts",
+            },
+        ],
+    },
+)
+
+price_list_items = pai.create(
+    path="fgmm/price-list-items",
+    description="Price list items table",
+    source={
+        "type": "postgres",
+        "connection": connection,
+        "table": "price_list_items",
+        "columns": [
+            {"name": "id", "type": "bigint", "description": "Primary key"},
+            {
+                "name": "price_list_id",
+                "type": "integer",
+                "description": "ID of the associated price list",
+            },
+            {
+                "name": "product_id",
+                "type": "integer",
+                "description": "ID of the product",
+            },
+            {"name": "item_code", "type": "string", "description": "Code of the item"},
+            {"name": "item_name", "type": "string", "description": "Name of the item"},
+            {
+                "name": "item_price",
+                "type": "string",
+                "description": "Price of the item",
+            },
+            {
+                "name": "created_at",
+                "type": "timestamp",
+                "description": "Creation timestamp",
+            },
+            {
+                "name": "updated_at",
+                "type": "timestamp",
+                "description": "Update timestamp",
+            },
+        ],
+    },
+)
+
+offers = pai.create(
+    path="fgmm/offers",
+    description="Offers table",
+    source={
+        "type": "postgres",
+        "connection": connection,
+        "table": "offers",
+        "columns": [
+            {"name": "id", "type": "bigint", "description": "Primary key"},
+            {"name": "name", "type": "string", "description": "Name of the offer"},
+            {"name": "type", "type": "string", "description": "Type of the offer"},
+            {
+                "name": "description",
+                "type": "text",
+                "description": "Description of the offer",
+            },
+            {
+                "name": "deleted_at",
+                "type": "timestamp",
+                "description": "Timestamp for soft deletion",
+            },
+            {
+                "name": "created_at",
+                "type": "timestamp",
+                "description": "Creation timestamp",
+            },
+            {
+                "name": "updated_at",
+                "type": "timestamp",
+                "description": "Update timestamp",
+            },
+            {
+                "name": "start_date",
+                "type": "string",
+                "description": "Start date of the offer",
+            },
+            {
+                "name": "end_date",
+                "type": "string",
+                "description": "End date of the offer",
+            },
+            {
+                "name": "agency_id",
+                "type": "integer",
+                "description": "ID of the associated agency",
+            },
+            {
+                "name": "brand_id",
+                "type": "integer",
+                "description": "ID of the associated brand",
+            },
+            {"name": "image", "type": "string", "description": "Image path or URL"},
+            {
+                "name": "status",
+                "type": "boolean",
+                "description": "Status of the offer (active/inactive)",
+            },
+            {
+                "name": "offer_code",
+                "type": "string",
+                "description": "Code of the offer",
+            },
+            {
+                "name": "has_bp_classification",
+                "type": "integer",
+                "description": "Indicates presence of BP classification",
+            },
+            {
+                "name": "is_processed",
+                "type": "boolean",
+                "description": "Indicates if the offer has been processed",
+            },
+            {
+                "name": "curve_image",
+                "type": "string",
+                "description": "Path or URL of the curve image",
+            },
+            {"name": "note", "type": "text", "description": "Additional notes"},
+            {
+                "name": "gift_type",
+                "type": "string",
+                "description": "Type of gift offered",
+            },
+            {
+                "name": "price",
+                "type": "integer",
+                "description": "Price associated with the offer",
+            },
+        ],
+    },
+)
+
+offer_product = pai.create(
+    path="fgmm/offer-product",
+    description="Offer product pivot table",
+    source={
+        "type": "postgres",
+        "connection": connection,
+        "table": "offer_product",
+        "columns": [
+            {"name": "id", "type": "integer", "description": "Primary key"},
+            {
+                "name": "offer_id",
+                "type": "integer",
+                "description": "ID of the associated offer",
+            },
+            {
+                "name": "product_id",
+                "type": "integer",
+                "description": "ID of the associated product",
+            },
+        ],
+    },
+)
+
+invoice_returns = pai.create(
+    path="fgmm/invoice-returns",
+    description="Invoice returns table",
+    source={
+        "type": "postgres",
+        "connection": connection,
+        "table": "invoice_returns",
+        "columns": [
+            {"name": "id", "type": "bigint", "description": "Primary key"},
+            {
+                "name": "invoice_return_ref",
+                "type": "string",
+                "description": "Reference code of the invoice return",
+            },
+            {
+                "name": "invoice_id",
+                "type": "integer",
+                "description": "ID of the original invoice",
+            },
+            {"name": "seller_id", "type": "integer", "description": "ID of the seller"},
+            {
+                "name": "seller_type",
+                "type": "string",
+                "description": "Type of the seller (e.g., agency, distributor)",
+            },
+            {"name": "buyer_id", "type": "integer", "description": "ID of the buyer"},
+            {
+                "name": "buyer_type",
+                "type": "string",
+                "description": "Type of the buyer (e.g., customer, retailer)",
+            },
+            {
+                "name": "total_qty",
+                "type": "integer",
+                "description": "Total quantity returned",
+            },
+            {
+                "name": "total_price",
+                "type": "numeric(20,6)",
+                "description": "Total price of the returned items",
+            },
+            {
+                "name": "description",
+                "type": "string",
+                "description": "Description or reason for the return",
+            },
+            {
+                "name": "status",
+                "type": "boolean",
+                "description": "Return status (active/inactive)",
+            },
+            {
+                "name": "created_at",
+                "type": "timestamp",
+                "description": "Creation timestamp",
+            },
+            {
+                "name": "updated_at",
+                "type": "timestamp",
+                "description": "Update timestamp",
+            },
+            {
+                "name": "deleted_at",
+                "type": "timestamp",
+                "description": "Timestamp of deletion if soft-deleted",
+            },
+            {
+                "name": "created_by",
+                "type": "integer",
+                "description": "ID of the creator",
+            },
+            {
+                "name": "createable_type",
+                "type": "string",
+                "description": "Type of creator (e.g., admin)",
+            },
+            {
+                "name": "temp_id",
+                "type": "string",
+                "description": "Temporary identifier",
+            },
+            {
+                "name": "sync_time",
+                "type": "timestamp",
+                "description": "Timestamp when data was last synced",
+            },
+            {
+                "name": "creation_way",
+                "type": "string",
+                "description": "Method used for creation (e.g., web)",
+            },
+        ],
+    },
+)
+
+invoice_return_details = pai.create(
+    path="fgmm/invoice-return-details",
+    description="Invoice return details table",
+    source={
+        "type": "postgres",
+        "connection": connection,
+        "table": "invoice_return_details",
+        "columns": [
+            {"name": "id", "type": "bigint", "description": "Primary key"},
+            {
+                "name": "invoice_return_id",
+                "type": "integer",
+                "description": "ID of the related invoice return",
+            },
+            {
+                "name": "product_id",
+                "type": "integer",
+                "description": "ID of the returned product",
+            },
+            {
+                "name": "quantity",
+                "type": "integer",
+                "description": "Quantity of product returned",
+            },
+            {
+                "name": "price",
+                "type": "numeric(20,6)",
+                "description": "Unit price of the returned item",
+            },
+            {
+                "name": "created_at",
+                "type": "timestamp",
+                "description": "Creation timestamp",
+            },
+            {
+                "name": "updated_at",
+                "type": "timestamp",
+                "description": "Update timestamp",
+            },
+            {
+                "name": "deleted_at",
+                "type": "timestamp",
+                "description": "Timestamp of deletion if soft-deleted",
+            },
+        ],
+    },
+)

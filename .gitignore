@@ -1,2 +1,6 @@
 .venv
 datasets
+__pycache__/
+*.pyc
+cache
+pandasai.log
