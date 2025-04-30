@@ -45,7 +45,6 @@ def read_root(prompt: str):
         df_invoice_return_details,
     )
 
-    print(pai.last_error)
     # Handle different return types
     if isinstance(response, pd.DataFrame):
         return response.to_dict(orient="records")
