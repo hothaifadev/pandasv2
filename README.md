@@ -23,8 +23,8 @@ SELECT * FROM invoice_details WHERE status = 'completed' -- in fgmm status colum
 ## Fix issues
 
 we have two options
-1. fix the database and clean the data
-2. fix the pandas ai code generation but for now i don't know how to do that (no clear pandasai documentation)
+1. resolve database and clean the data
+2. resolve pandas ai code generation but for now i don't know how to do that (no clear pandasai documentation)
 
 
 
